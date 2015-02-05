@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TODO LIST!!!!</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.11/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.11/angular-animate.min.js"></script>
+    <script src="js/image-toggle.js"></script>
+    <script src="js/like-btn.js"></script>
+    <script src="js/weather.js"></script>
+    <script src="js/script.js"></script>
+</head>
+<body ng-app="TodoApp">
+  <div class="container">
+    <div class="row" ng-controller="TodoApp">
+      <div class="col-sm-12">
+        <div class="animated infinite" ng-class="myAnimation">
+          <h1>"sup"</h1>
+          <image-toggle state="true" on="http://beedogs.com/index_files/image002.jpg" off="http://beedogs.com/index_files/image016.jpg"></image-toggle>
+        <input type="text" ng-model="myAnimation">
+        </div>
+        <div class="like-buttons">
+          <like-btn starting-value="1"></like-btn>
+          <like-btn starting-value="1"></like-btn>
+          <like-btn starting-value="1"></like-btn>
+        </div>
+        <div class="weather-stuff">
+          <weather-directive location=Seattle></weather-directive>
+        </div>
+        </form><br>
+        <h3>TO DO</h3>
+        <form>
+        <div class="form-group col-xs-4">
+          <input type="text" class="form-control" ng-model="newItem" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-primary" ng-disabled="newItem.length < 1" ng-click="addItem()">Add Item</button>
+        <button class="btn btn-primary btn-animated" ng-click="getData()">Get Data</button>
+        <table class="table">
+          <tr>
+            <th></th>
+            <th>Item</th>
+            <th></th>
+          </tr>
+          <tr class="todo-anim" ng-class="{'danger':item.done}" ng-repeat="item in items">
+            <td><input type="checkbox" ng-model="item.done"></td>
+              <td ng-click="item.done = !item.done">{{item.name}}</td>
+            <td>
+            <button class="btn btn-danger" ng-click="removeItem($index)">
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
+            <button class="btn" ng-disabled="$index == 0" ng-click="move($index,-1)">
+              <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+            </button>
+            <button class="btn" ng-disabled="$index == items.length - 1" ng-click="move($index,1)">
+              <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+            </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
